@@ -1,7 +1,7 @@
-# RISE-DASHBOARD
+# DASHBOARD
 
 ## Overview
-**RISE-AI** is a modern, responsive, and feature-rich admin dashboard template built using **Next.js** and **Tailwind CSS**. This project aims to provide an easy-to-use and scalable solution for building admin panels with a clean and intuitive UI.
+**AI** is a modern, responsive, and feature-rich admin dashboard template built using **Next.js** and **Tailwind CSS**. This project aims to provide an easy-to-use and scalable solution for building admin panels with a clean and intuitive UI.
 
 ## Features
 - Built with **Next.js 14** for fast and efficient performance
