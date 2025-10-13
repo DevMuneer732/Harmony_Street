@@ -20,7 +20,7 @@ export default function Signin() {
       <div>
         <SigninWithPassword />
       </div>
-
+{/* 
       <div className="mt-6 text-center">
         <p>
           Don’t have any account?{" "}
@@ -28,7 +28,7 @@ export default function Signin() {
             Sign Up
           </Link>
         </p>
-      </div>
+      </div> */}
     </>
   );
 }

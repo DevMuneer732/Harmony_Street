@@ -88,7 +88,7 @@ export default function SigninWithPassword() {
         </div>
       </div>
 
-      <div className="mb-6 flex items-center justify-between gap-2 py-2">
+      {/* <div className="mb-6 flex items-center justify-between gap-2 py-2">
         <label
           htmlFor="remember"
           className="flex cursor-pointer select-none items-center font-satoshi text-base font-medium text-dark dark:text-white"
@@ -128,7 +128,7 @@ export default function SigninWithPassword() {
         >
           Forgot Password?
         </Link>
-      </div>
+      </div> */}
 
       <div className="mb-4.5">
         <button

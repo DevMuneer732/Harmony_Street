@@ -7,8 +7,10 @@ import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import Signin from "@/components/Auth/Signin";
 
 export const metadata: Metadata = {
-  title: "Next.js Login Page | NextAdmin - Next.js Dashboard Kit",
-  description: "This is Next.js Login Page NextAdmin Dashboard Kit",
+  // title: "Next.js Login Page | NextAdmin - Next.js Dashboard Kit",
+  // description: "This is Next.js Login Page NextAdmin Dashboard Kit",
+  title: "Harmony Street | Sign In",
+  description: "Signin to Harmony Street Dashboard"
 };
 
 const SignIn: React.FC = () => {

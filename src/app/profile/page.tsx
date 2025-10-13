@@ -4,8 +4,8 @@ import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import ProfileBox from "@/components/ProfileBox";
 
 export const metadata: Metadata = {
-  title: "RISE-AI",
-  description: "RISE-AI | DASHBOARD",
+  title: "Harmony Street | Profile",
+  description: "HARMONY-STREET  | DASHBOARD",
 };
 
 const Profile = () => {

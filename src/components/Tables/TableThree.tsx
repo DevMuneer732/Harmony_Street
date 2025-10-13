@@ -1,27 +1,33 @@
 "use client";
 import React, { useState } from "react";
 import { Package } from "@/types/package";
+import SubscriptionModal from "../Modals/SubscriptionModal";
+import DeleteModal from "../Modals/DeleteModal";
 
 const packageData: Package[] = [
   {
+    id: "1",
     name: "Free package",
     price: 0.0,
     invoiceDate: `Jan 13,2023`,
     status: "Active",
   },
   {
+    id: "1",
     name: "Standard Package",
     price: 59.0,
     invoiceDate: `Feb 27,2023`,
     status: "Active",
   },
   {
+    id: "3",
     name: "Business Package",
     price: 99.0,
     invoiceDate: `May 10,2024`,
     status: "Deactivate",
   },
   {
+    id: "4",
     name: "Business Pro Package",
     price: 259.0,
     invoiceDate: `Dec 13,2024`,
@@ -30,7 +36,42 @@ const packageData: Package[] = [
 ];
 
 const TableThree = () => {
- 
+  const [data, setData] = useState(packageData);
+  const [selected, setSelected] = useState<Package | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [packageToDelete, setPackageToDelete] = useState<Package | null>(null);
+
+
+  // Edit button handle Edit 
+  const handleEdit = (item: Package) => {
+    setSelected(item);
+    setIsModalOpen(true);
+  };
+
+  //  When save button clicked
+  const handleSave = (updated: Package) => {
+    setData((prev) =>
+      prev.map((pkg) =>
+        pkg.name === updated.name ? updated : pkg
+      )
+    );
+    setIsModalOpen(false);
+  };
+
+  const handleDeleteClick = (pkg: Package) => {
+    setPackageToDelete(pkg);
+    setDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (packageToDelete) {
+      setData((prev) => prev.filter((pkg) => pkg.id !== packageToDelete.id));
+    }
+    setDeleteModalOpen(false);
+    setPackageToDelete(null);
+  };
+
   return (
     <div className="rounded-[10px] border border-stroke bg-white p-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:p-7.5">
       <div className="max-w-full overflow-x-auto">
@@ -78,11 +119,10 @@ const TableThree = () => {
                   className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageData.length - 1 ? "border-b-0" : "border-b"}`}
                 >
                   <p
-                    className={`inline-flex rounded-full px-3.5 py-1 text-body-sm font-medium ${
-                      packageItem.status === "Active"
-                        ? "bg-[#219653]/[0.08] text-[#219653]"
-                        : "bg-[#FFA70B]/[0.08] text-[#FFA70B]"
-                    }`}
+                    className={`inline-flex rounded-full px-3.5 py-1 text-body-sm font-medium ${packageItem.status === "Active"
+                      ? "bg-[#219653]/[0.08] text-[#219653]"
+                      : "bg-[#FFA70B]/[0.08] text-[#FFA70B]"
+                      }`}
                   >
                     {packageItem.status}
                   </p>
@@ -124,7 +164,7 @@ const TableThree = () => {
                         />
                       </svg>
                     </button>
-                    <button className="hover:text-primary">
+                    <button className="hover:text-primary"  onClick={() => handleDeleteClick(packageItem)}>
                       <svg
                         className="fill-current"
                         width="20"
@@ -153,7 +193,7 @@ const TableThree = () => {
                         />
                       </svg>
                     </button>
-                    <button className="hover:text-primary">
+                    <button onClick={() => handleEdit(packageItem)} className="hover:text-primary">
                       <svg
                         className="fill-current"
                         width="20"
@@ -175,8 +215,27 @@ const TableThree = () => {
           </tbody>
         </table>
       </div>
+
+      {isModalOpen && selected && (
+        <SubscriptionModal
+          pkg={selected}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSave}
+        />
+      )}
+
+        {/* Delete Modal */}
+      {deleteModalOpen && packageToDelete && (
+        <DeleteModal
+          itemName={packageToDelete.name}
+          onClose={() => setDeleteModalOpen(false)}
+          onConfirm={handleConfirmDelete}
+        />
+      )}
     </div>
   );
 };
 
 export default TableThree;
+
+

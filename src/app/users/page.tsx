@@ -1,6 +1,7 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import TableFive from "@/components/Tables/TableFive";
+import TableSix from "@/components/Tables/TableSix";
 
 // export const metadata: Metadata = {
 //   title: "Next.js Organizations Page | NextAdmin - Next.js Dashboard Kit",
@@ -12,7 +13,8 @@ const SubscriptionsPage = () => {
     <DefaultLayout>
       <Breadcrumb pageName="Users" />
       <div className="flex flex-col gap-10">
-       <TableFive/>
+        {/* <TableFive /> */}
+        <TableSix/>
       </div>
     </DefaultLayout>
   );
