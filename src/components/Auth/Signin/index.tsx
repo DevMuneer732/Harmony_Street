@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import GoogleSigninButton from "../GoogleSigninButton";
 import SigninWithPassword from "../SigninWithPassword";
-
+import SigninWithFormik from "./SigninWithFormik";
 export default function Signin() {
   return (
     <>
@@ -18,9 +18,13 @@ export default function Signin() {
       </div> */}
 
       <div>
-        <SigninWithPassword />
+        <div className="mb-6 text-center text-3xl text-black font-bold">
+          <p>Sign In</p>
+        </div>
+        {/* <SigninWithPassword /> */}
+        <SigninWithFormik />
       </div>
-{/* 
+      {/* 
       <div className="mt-6 text-center">
         <p>
           Don’t have any account?{" "}

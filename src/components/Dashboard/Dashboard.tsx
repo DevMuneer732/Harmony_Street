@@ -1,20 +1,20 @@
 "use client";
 import React from "react";
-// import ChartThree from "../Charts/ChartThree";
+import ChartThree from "../Charts/ChartThree";
 import ChartTwo from "../Charts/ChartTwo";
-// import ChatCard from "../Chat/ChatCard";
-// import TableOne from "../Tables/TableOne";
-// import MapOne from "../Maps/MapOne";
+import ChatCard from "../Chat/ChatCard";
+import TableOne from "../Tables/TableOne";
+import MapOne from "../Maps/MapOne";
 import DataStatsOne from "@/components/DataStats/DataStatsOne";
 import ChartOne from "@/components/Charts/ChartOne";
-import { Mail, CheckCircle, Clock, XCircle } from 'lucide-react';
+// import { Mail, CheckCircle, Clock, XCircle } from 'lucide-react';
 
-const stats = {
-  totalInvited: 24,
-  activeUsers: 18,
-  pending: 6,
-  declined: 2
-};
+// const stats = {
+//   totalInvited: 24,
+//   activeUsers: 18,
+//   pending: 6,
+//   declined: 2
+// };
 
 const recentActivity = [
   { user: 'john@example.com', action: 'Accepted invite', time: '2 hours ago', status: 'success' },
@@ -26,10 +26,10 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      {/* <DataStatsOne />
 
-      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-9 2xl:gap-7.5">
-        <ChartOne />
+
+      {/* <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-9 2xl:gap-7.5">
+
         <ChartTwo />
         <ChartThree />
         <MapOne />
@@ -41,8 +41,10 @@ const Dashboard: React.FC = () => {
 
 
       <div className="space-y-6">
+        <DataStatsOne />
+        <ChartOne />
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
             <div className="flex items-center justify-between">
               <div>
@@ -82,7 +84,7 @@ const Dashboard: React.FC = () => {
               <XCircle className="text-red-500" size={32} />
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Recent Activity */}
         <div className="bg-white rounded-lg shadow">

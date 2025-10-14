@@ -8,8 +8,7 @@ export default function SigninWithPassword() {
   });
 
   return (
-
-
+    
     <form>
       <div className="mb-4">
         <label

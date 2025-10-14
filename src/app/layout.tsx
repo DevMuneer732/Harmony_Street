@@ -18,6 +18,7 @@ export default function RootLayout({
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
+    
   }, []);
 
   return (

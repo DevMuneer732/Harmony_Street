@@ -24,7 +24,7 @@ const InviteForm: React.FC = () => {
         // Example: axios.post('/api/invite', { emails: emailsToInvite, platform, message });
         // --- END API CALL ---
 
-        alert(`Invitations for ${platform.toUpperCase()} sent to ${emailsToInvite.length} users!`);
+        // alert(`Invitations for ${platform.toUpperCase()} sent to ${emailsToInvite.length} users!`);
 
         // Reset state
         setEmailsToInvite([]);

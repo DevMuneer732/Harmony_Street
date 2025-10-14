@@ -2,7 +2,8 @@
 
 import React, { useState, useMemo, useEffect, ChangeEvent, MouseEvent } from "react";
 import { Search, Download, Trash2, Eye, CheckCircle, XCircle } from 'lucide-react';
-
+import DeleteModal from "../Modals/DeleteModal";
+import ViewUserModal from "../Modals/ViewUserModal";
 // --- 1. Define Types and Interfaces ---
 
 interface User {
@@ -19,7 +20,10 @@ type UserStatus = 'Active' | 'Inactive' | 'Pending';
 
 // Define a union type for the filter state (including 'All')
 type StatusFilter = UserStatus | 'All';
-
+interface UserToDelete {
+    id: number;
+    name: string
+}
 // --- MOCK DATA ---
 const initialUsers: User[] = [
     { id: 1, name: 'John Doe', email: 'john@example.com', status: 'Active', joinedDate: '2024-10-01' },
@@ -42,6 +46,10 @@ const TableSix: React.FC = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [statusFilter, setStatusFilter] = useState<StatusFilter>("All");
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [userToDelete, setUserToDelete] = useState<UserToDelete | null>(null);
+    const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+    const [userToView, setUserToView] = useState<User | null>(null);
 
     // Memoized filtering and searching logic
     const filteredUsers = useMemo(() => {
@@ -83,14 +91,29 @@ const TableSix: React.FC = () => {
         }));
     };
 
-    // Handler to delete a user
-    const deleteUser = (userId: number) => {
-        // In a real application, you would show a confirmation modal here instead of direct deletion
-        if (window.confirm("Are you sure you want to delete this user?")) {
-            setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
-        }
+    // NEW: Handler to open the modal
+    const handleDeleteClick = (user: User) => {
+        setUserToDelete({ id: user.id, name: user.name });
+        setIsDeleteModalOpen(true);
+
     };
 
+    // NEW: Handler for confirming deletion
+    const confirmDelete = () => {
+        if (userToDelete) {
+            console.log("Deleted user ID:", userToDelete.id);
+            setUsers(prevUsers => prevUsers.filter(user => user.id !== userToDelete.id));
+        }
+
+        // Close the modal and reset the userToDelete state
+        setIsDeleteModalOpen(false);
+        setUserToDelete(null);
+    };
+
+    const handleViewClick = (user: User) => {
+        setUserToView(user);
+        setIsViewModalOpen(true);
+    }
     // Handler for search input change
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
@@ -118,7 +141,22 @@ const TableSix: React.FC = () => {
 
     return (
         <div className="space-y-6 min-h-screen">
+            {/* Render Delete Modal here */}
+            {isDeleteModalOpen && userToDelete && (
+                <DeleteModal
+                    itemName={userToDelete.name}
+                    onClose={() => setIsDeleteModalOpen(false)}
+                    onConfirm={confirmDelete}
+                />
+            )}
 
+            {/* Render View User Modal  */}
+            {isViewModalOpen && userToView && (
+                <ViewUserModal
+                    user={userToView}
+                    onClose={() => setIsViewModalOpen(false)}
+                />
+            )}
             {/* Search and Filter Bar */}
             <div className="bg-white rounded-lg shadow p-4">
                 <div className="flex flex-col md:flex-row gap-4">
@@ -201,11 +239,15 @@ const TableSix: React.FC = () => {
                                         >
                                             {user.status === 'Active' ? <CheckCircle size={20} className="text-green-600" /> : <XCircle size={20} className="text-red-600" />}
                                         </button>
-                                        <button className="p-2 rounded-full hover:bg-slate-200 transition-colors" title="View Details">
+                                        <button
+                                            onClick={() => handleViewClick(user)}
+                                            className="p-2 rounded-full hover:bg-slate-200 transition-colors"
+                                            title="View Details"
+                                        >
                                             <Eye size={20} className="text-indigo-500" />
                                         </button>
                                         <button
-                                            onClick={() => deleteUser(user.id)}
+                                            onClick={() => handleDeleteClick(user)}
                                             className="p-2 rounded-full hover:bg-red-100 transition-colors"
                                             title="Delete User"
                                         >
