@@ -68,9 +68,9 @@ const DropdownUser = () => {
               <span className="block font-medium text-dark dark:text-white">
                 Admin
               </span>
-              <span className="block font-medium text-dark-5 dark:text-dark-6">
+              {/* <span className="block font-medium text-dark-5 dark:text-dark-6">
                 admin@rise.com
-              </span>
+              </span> */}
             </span>
           </div>
           <ul className="flex flex-col gap-1 border-y-[0.5px] border-stroke p-2.5 dark:border-dark-3">

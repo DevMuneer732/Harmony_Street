@@ -121,9 +121,9 @@ const ProfileBox = () => {
             </div> */}
 
             <div className="mx-auto max-w-[720px]">
-              <h4 className="font-medium text-dark dark:text-white">
+              {/* <h4 className="font-medium text-dark dark:text-white">
               admin@rise.com
-              </h4>
+              </h4> */}
               {/* <p className="mt-4">
               orem ipsum, in graphical and textual context, refers to filler text that is placed in a document or visual presentation. Lorem ipsum is derived from the Latin "dolorem ipsum" roughly translated as
               </p> */}
