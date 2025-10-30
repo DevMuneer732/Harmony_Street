@@ -5,6 +5,7 @@ import "@/css/satoshi.css";
 import "@/css/style.css";
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/common/Loader";
+import AuthProvider from "@/components/AuthProvider";
 
 export default function RootLayout({
   children,
@@ -18,13 +19,19 @@ export default function RootLayout({
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
-    
+
   }, []);
 
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        {loading ? <Loader /> : children}
+        {loading ? (
+          <Loader />
+        ) : (
+          <AuthProvider>
+            {children}
+          </AuthProvider>
+        )}
       </body>
     </html>
   );
