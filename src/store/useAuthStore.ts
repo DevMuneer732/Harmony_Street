@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import { authService } from "@/service/auth.service";
 import { toast } from "react-hot-toast";
 import { User } from "@/types/auth";
@@ -21,51 +21,67 @@ const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: false,
 
+      // ✅ LOGIN FUNCTION
       login: async (email, password) => {
-        try {
-          set({ isLoading: true });
+        set({ isLoading: true });
 
+        try {
           const response = await authService.signIn({ email, password });
 
-          if (response?.res === "success" && response.token) {
+          const isSuccess =
+            response?.success === true ||
+            response?.res === "success" ||
+            response?.status === "success";
+
+          if (isSuccess && response.token) {
+            // Save token in localStorage
+            localStorage.setItem("hsma-access-token", response.token);
             authService.setToken(response.token);
 
             set({
               token: response.token,
               user: response.data ?? null,
               isAuthenticated: true,
-              isLoading: false,
             });
 
             toast.success("Login successful!");
             return true;
+          } else {
+            toast.error(response?.message || "Invalid email or password");
+            return false;
           }
-
-          toast.error(response?.message || "Invalid email or password");
-          set({ isLoading: false });
-          return false;
-        } catch (err) {
+        } catch (err: any) {
           console.error("Login failed:", err);
-          set({ isLoading: false });
-          toast.error("Login failed. Please try again.");
+          toast.error(err?.message || "Login failed. Please try again.");
           return false;
+        } finally {
+          set({ isLoading: false });
         }
       },
 
+      // ✅ LOGOUT FUNCTION
       logout: () => {
-        authService.signOut();
+        try {
+          authService.signOut();
+        } catch (e) {
+          console.warn("Sign out error:", e);
+        }
+
+        localStorage.removeItem("hsma-access-token");
+
         set({
           user: null,
           token: null,
           isAuthenticated: false,
           isLoading: false,
         });
+
         toast.success("Logged out successfully");
       },
     }),
     {
-      name: "auth-storage", // key for Zustand persistence
-      getStorage: () => localStorage,
+      name: "auth-storage", // localStorage key
+      storage: createJSONStorage(() => localStorage), // ✅ the correct way
     }
   )
 );

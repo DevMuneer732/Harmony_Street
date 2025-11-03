@@ -13,6 +13,7 @@
     "axios": "^1.13.1",
     "flatpickr": "^4.6.13",
     "formik": "^2.4.6",
+    "framer-motion": "^12.23.24",
     "i": "^0.3.7",
     "jsvectormap": "^1.5.3",
     "lucide-react": "^0.545.0",

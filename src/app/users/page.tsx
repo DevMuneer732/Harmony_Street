@@ -1,7 +1,7 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import TableFive from "@/components/Tables/TableFive";
-import TableSix from "@/components/Tables/TableSix";
+import TableSix from "@/components/Tables/UsersTable";
 
 // export const metadata: Metadata = {
 //   title: "Next.js Organizations Page | NextAdmin - Next.js Dashboard Kit",

@@ -1,23 +1,48 @@
-import axios from "axios";
+import api from "@/lib/api";
 import { ApiResponse, SignInData } from "@/types/auth";
 
 const TOKEN_KEY =
   process.env.NEXT_PUBLIC_LOCAL_STORAGE_TOKEN_KEY || "hsma-access-token";
 
+// 🔹 Normalize the API response (handles multiple shapes gracefully)
+const normalizeAuthResponse = (payload: any): ApiResponse => {
+  if (!payload) {
+    return {
+      res: "error",
+      msg: "Empty response from server.",
+      data: null,
+         success: false, 
+    };
+  }
+
+  return {
+    res: payload.res ?? (payload.success ? "success" : "error"),
+    msg:
+      payload.msg ??
+      payload.message ??
+      (payload.success ? "Success" : "An error occurred."),
+    data: payload.data ?? payload.user ?? null,
+    token: payload.token ?? null,
+    success:
+      payload.success === true ||
+      payload.status === "success" ||
+      payload.res === "success" ||
+      !!payload.token,
+  };
+};
+
 export const authService = {
   // 🔹 Sign In
-  signIn: async (data: SignInData): Promise<ApiResponse> => {
+  signIn: async (credentials: SignInData): Promise<ApiResponse> => {
     try {
-      const result = await axios.post(
-        "http://209.105.243.7:1011/v1/api/auth/signin",
-        data
-      );
+      const { data } = await api.post<any>("/auth/signin", credentials);
+      const normalized = normalizeAuthResponse(data);
 
-      if (result.data?.token) {
-        localStorage.setItem(TOKEN_KEY, result.data.token);
+      if (normalized.token) {
+        localStorage.setItem(TOKEN_KEY, normalized.token);
       }
 
-      return result.data;
+      return normalized;
     } catch (error: any) {
       console.error("Sign-in error:", error);
       throw error;
@@ -25,11 +50,10 @@ export const authService = {
   },
 
   // 🔹 Token helpers
-  getToken: () => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem(TOKEN_KEY);
-    }
-    return null;
+  getToken: (): string | null => {
+    return typeof window !== "undefined"
+      ? localStorage.getItem(TOKEN_KEY)
+      : null;
   },
 
   setToken: (token: string) => {

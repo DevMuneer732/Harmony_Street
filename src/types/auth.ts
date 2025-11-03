@@ -1,14 +1,27 @@
-export interface ApiError {
-  success: false;
-  message: string;
-  error?: string;
-}
+// -------------------------------
+// Generic API Response Types
+// -------------------------------
 export interface ApiResponse {
+  /** Indicates operation success */
   success: boolean;
-  message: string;
-  html?: string;
-  subject?: string;
+
+  /** Human-readable message from API */
+  message?: string;
+
+  /** Alternate response fields used by some APIs */
+  res?: string; // e.g., "success" | "error"
+  msg?: string; // e.g., "Login successful" | "Invalid credentials"
+
+  /** Optional HTTP-style status indicator */
+  status?: string; // e.g., "success" | "fail"
+
+  /** Optional JWT or session token */
+  token?: string | null;
+
+  /** Data payload from server */
   data: any;
+
+  /** Optional pagination meta */
   pagination?: {
     page: number;
     limit: number;
@@ -17,6 +30,9 @@ export interface ApiResponse {
   };
 }
 
+// -------------------------------
+// Auth-related Request Types
+// -------------------------------
 export interface SignInData {
   email: string;
   password: string;
@@ -28,7 +44,7 @@ export interface SignUpData {
   email: string;
   password: string;
   companyName?: string;
-  interested: {
+  interested?: {
     type: "job" | "project";
     experienceYears: string;
     expected: {
@@ -37,29 +53,49 @@ export interface SignUpData {
   };
 }
 
+// -------------------------------
+// User Type (Returned from API)
+// -------------------------------
 export interface User {
-  id: string;
   _id: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-  companyName: string;
+  id?: string;
+
+  // Identity Info
+  username?: string;
+  firstName?: string;
+  lastName?: string;
+  fullName?: string;
   email: string;
-  hasLocalPassword: boolean;
-  role: "superadmin" | "admin" | "moderator";
-  status: "active" | "inactive" | "suspended";
-  activePlan: Record<string, any>;
-  createdAt: string;
-  updatedAt: string;
-  loginHistory?: string[];
+
+  // Company / Branding
+  companyName?: string;
+  brandName?: string;
+
+  // Address
+  street_address?: string;
+  city?: string;
+  state?: string;
+  zip?: string | number;
+
+  // Profile
+  profileImage?: string;
+  twoFactorEnabled?: boolean;
+  isBanned?: boolean;
+
+  // Role / Permissions
+  role?: "superadmin" | "admin" | "moderator" | "user";
+  status?: "active" | "inactive" | "suspended";
+
+  // Metadata
+  createdAt?: string;
+  updatedAt?: string;
   lastLogin?: string;
-  gmail: any;
-  credit?: Record<string, any>;
-  isVerified?: boolean;
 }
-export interface AuthResponse {
-  success: boolean;
-  message: string;
+
+// -------------------------------
+// Auth Response (Sign-In Success)
+// -------------------------------
+export interface AuthResponse extends ApiResponse {
   data: {
     token: string;
     user: User;

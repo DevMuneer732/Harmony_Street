@@ -7,7 +7,10 @@ interface CallApiOptions {
   showError?: boolean;
 }
 
-export const callApi = async <T>(apiCall: () => Promise<T>, options: CallApiOptions = {}): Promise<T | null> => {
+export const callApi = async <T>(
+  apiCall: () => Promise<T>,
+  options: CallApiOptions = {}
+): Promise<T | null> => {
   const {
     successMessage = "Success",
     errorMessage = "Something went wrong",
