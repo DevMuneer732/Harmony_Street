@@ -7,7 +7,7 @@ import React from "react";
 export default function PrivacyPage() {
   return (
        <DefaultLayout>
-                  <Breadcrumb pageName="Send Invitations" />
+                  <Breadcrumb pageName="Privacy Policy" />
                         <PrivacyPolicy />
 
             </DefaultLayout>

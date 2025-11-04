@@ -33,7 +33,7 @@ const PrivacyPolicy: React.FC = () => {
   ];
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-12 md:px-8">
+    <div className="mx-auto w-full  py-6 px-2">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -41,10 +41,10 @@ const PrivacyPolicy: React.FC = () => {
         className="rounded-2xl bg-white p-8 shadow-lg ring-1 ring-slate-200/60"
       >
         <header className="mb-10 border-b border-slate-200 pb-6 text-center">
-          <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+          {/* <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
             Privacy Policy
-          </h1>
-          <p className="mt-3 text-base text-slate-600 max-w-2xl mx-auto">
+          </h1> */}
+          <p className="mt-3 text-base text-slate-600 max-w-2xl mx-auto ">
             Harmony Street respects your privacy and is committed to protecting
             your personal information. This policy explains what data we
             collect, how we use it, and the choices you have.

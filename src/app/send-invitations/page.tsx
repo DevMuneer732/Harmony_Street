@@ -1,7 +1,8 @@
 "use client";
 
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
-import InfoBox from "@/components/Invitations/InfoBox";
+import InviteStatsView from "@/components/Invitations/InfoBox";
+
 import InviteForm from "@/components/Invitations/InviteForm";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import { Send } from "lucide-react"; // ✅ Capitalized import — must match the icon name exactly
@@ -28,7 +29,7 @@ const ClientsPage = () => {
                     <InviteForm />
 
                     {/* Info Box */}
-                    <InfoBox />
+                    <InviteStatsView />
                 </div>
             </div>
         </DefaultLayout>

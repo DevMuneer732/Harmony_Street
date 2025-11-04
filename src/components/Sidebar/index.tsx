@@ -85,7 +85,7 @@ const menuGroups = [
         route: "/send-invitations",
       },
 
-      // 👇 ADDED: Terms of Service
+      // ADDED: Terms of Service
       {
         icon: (
           <svg
@@ -104,11 +104,11 @@ const menuGroups = [
             <path d="M8 20h7a3 3 0 0 0 3-3V7.5A2.5 2.5 0 0 0 15.5 5H7A3 3 0 0 0 4 8v9a3 3 0 0 0 3 3Z" />
           </svg>
         ),
-        label: "Terms of Service",
+        label: "Terms and Conditions",
         route: "/terms",
       },
 
-      // 👇 ADDED: Privacy Policy
+      //  ADDED: Privacy Policy
       {
         icon: (
           <svg

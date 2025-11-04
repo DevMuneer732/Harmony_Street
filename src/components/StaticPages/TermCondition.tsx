@@ -33,7 +33,7 @@ const TermsOfService: React.FC = () => {
   ];
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-4 py-12 md:px-8">
+    <div className="mx-auto w-full  px-2 py-12">
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -42,9 +42,9 @@ const TermsOfService: React.FC = () => {
       >
         {/* Header */}
         <header className="mb-10 border-b border-slate-200 pb-6 text-center">
-          <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
+          {/* <h1 className="text-3xl font-extrabold text-slate-900 sm:text-4xl">
             Terms of Service
-          </h1>
+          </h1> */}
           <p className="mt-3 text-base text-slate-600 max-w-2xl mx-auto">
             By using Harmony Street, you agree to these Terms of Service. Please
             read them carefully before creating an account.
