@@ -133,7 +133,7 @@ const InviteStatsView: React.FC = () => {
               <div>Date</div>
               <div>Type</div>
               <div className="col-span-2">Recipients</div>
-              <div className="text-center">Count</div>
+              {/* <div className="text-center">Count</div> */}
               <div className="text-center">Sent By</div>
             </div>
 
@@ -166,7 +166,7 @@ const InviteStatsView: React.FC = () => {
                           <span className="text-slate-400 text-sm">—</span>
                         )}
                       </div>
-                      <div className="text-center font-semibold text-slate-800">{row.count}</div>
+                      {/* <div className="text-center font-semibold text-slate-800">{row.count}</div> */}
                       <div className="text-center text-slate-700">{row.sentBy}</div>
                     </div>
                   ))}
